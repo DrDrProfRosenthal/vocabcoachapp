@@ -24,9 +24,15 @@ export default async function Home({
 
 
             <div>
-              { rows }
-            </div>
-            
+            {rows.map((row) => (
+              <div key={row.id} className="vocab-item">
+                <h2>{row.word}</h2>
+                <p>{row.meaning}</p>
+              </div>
+            ))}
+          </div>
+
+          
          </div>
 
         
