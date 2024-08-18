@@ -1,6 +1,14 @@
 import Image from "next/image";
+// import { lusitana } from '@/app/ui/fonts';
 
-export default function Home() {
+import VocabChart from '@/app/ui/dashboard/vocab-chart';
+import { fetchVocabs} from '@/app/lib/data';
+
+
+export default async function Home() {
+
+  const vocabs = await fetchVocabs();
+
   return (
     <main>
     <div className="center-container">
@@ -10,8 +18,22 @@ export default function Home() {
            </div>
             <input type="text" className="centered-input inline-block" placeholder="Enter text here"></input>
             <button className="btn inline-block" id="myBtn" type="submit">Go!</button>
+
+
+       <div >
+        { <VocabChart vocab={vocabs}  /> }
+      
+      </div>
+
         </div>
     </div>
+
+
+
+
+
     </main>
   );
 }
+
+
