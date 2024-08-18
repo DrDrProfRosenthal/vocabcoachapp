@@ -1,14 +1,17 @@
 import Image from "next/image";
 // import { lusitana } from '@/app/ui/fonts';
 
-import VocabChart from '@/app/ui/dashboard/vocab-chart';
-import { fetchVocabs} from '@/app/lib/data';
+import { sql } from "@vercel/postgres";
 
 
-export default async function Home() {
+export default async function Home({
+  params
+} : {
+  params: { user: string }
+}): Promise<JSX.Element> {
+  const { rows } = await sql`SELECT * from vocabs`;
 
-  const vocabs = await fetchVocabs();
-
+ 
   return (
     <main>
     <div className="center-container">
@@ -20,17 +23,14 @@ export default async function Home() {
             <button className="btn inline-block" id="myBtn" type="submit">Go!</button>
 
 
-       <div >
-        { <VocabChart vocab={vocabs}  /> }
-      
-      </div>
+            <div>
+              { rows }
+            </div>
+            
+         </div>
 
-        </div>
+        
     </div>
-
-
-
-
 
     </main>
   );
